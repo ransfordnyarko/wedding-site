@@ -1,0 +1,88 @@
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  overflow: hidden; display: flex;
+  align-items: center; justify-content: center;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0; transform: scale(1.04);
+  transition: opacity 1.2s ease, transform 6s ease;
+}
+.slide.active { opacity: 1; transform: scale(1); }
+
+.overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(20,20,18,0.3) 0%,
+    rgba(20,20,18,0.45) 60%,
+    rgba(20,20,18,0.6) 100%
+  );
+}
+
+.content {
+  position: relative; z-index: 2;
+  text-align: center; color: var(--white);
+  padding: 0 2rem;
+}
+
+.eyebrow {
+  font-size: 11px; letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--warm-gray); margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s 0.3s both;
+}
+
+.headline {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.2rem;
+}
+
+.line1 {
+  font-family: var(--serif);
+  font-size: clamp(0.1rem, 4vw, 2.5rem);
+  font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+  animation: fadeUp 1s 0.5s both;
+}
+
+.line2 {
+  font-family: var(--serif);
+  font-size: clamp(0.2rem, 4vw, 2.5rem);
+  font-weight: 400; font-style: italic;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  animation: fadeUp 1s 0.7s both;
+}
+
+.cta {
+  display: inline-block; margin-top: 2.5rem;
+  font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  border-bottom: 1px solid rgba(250,250,248,0.5);
+  padding-bottom: 4px;
+  transition: border-color 0.3s, letter-spacing 0.3s;
+  animation: fadeUp 1s 0.9s both;
+}
+.cta:hover { border-color: var(--white); letter-spacing: 0.35em; }
+
+.dots {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 2;
+}
+
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(250,250,248,0.35);
+  border: none; cursor: none;
+  transition: background 0.3s, transform 0.3s;
+}
+.dotActive { background: var(--white); transform: scale(1.4); }
+
+.scrollLine {
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 1px; height: 60px;
+  background: linear-gradient(180deg, rgba(250,250,248,0.5), transparent);
+  z-index: 2;
+}
