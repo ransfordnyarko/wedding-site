@@ -1,0 +1,285 @@
+/* ── "Nine years, one thread" ───────────────────────────────────────── */
+
+.section {
+  --band: 120px;
+  --gutter: 64px;
+  --slide-gap: 56px;
+  position: relative;
+  background: var(--t-ground);
+  color: var(--t-ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  padding: 72px 0 64px;
+  overflow: hidden;
+  overflow: clip; /* not a scroll container, so focusing something can't shift the track */
+}
+
+:where(.section) button { font-family: inherit; color: inherit; cursor: inherit; }
+.section button:focus-visible,
+.section [role="group"]:focus-visible { outline: 2px solid var(--t-ink); outline-offset: 3px; }
+.slide:focus { outline: none; }
+
+/* Header */
+.header,
+.yearRail,
+.viewport,
+.controls { max-width: 1312px; margin-left: auto; margin-right: auto; padding-left: var(--gutter); padding-right: var(--gutter); box-sizing: border-box; }
+
+.header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.headText { display: flex; flex-direction: column; gap: 14px; }
+
+.label {
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--t-muted);
+}
+.heading {
+  margin: 0;
+  font-family: var(--serif); font-weight: 400;
+  font-size: 46px; line-height: 1.1;
+  color: var(--t-ink);
+}
+.heading em { font-style: italic; color: var(--t-thread); }
+.counter { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--t-muted); font-variant-numeric: tabular-nums; }
+
+/* Year rail */
+.yearRail {
+  margin-top: 40px;
+  display: flex; flex-wrap: wrap; gap: 4px 8px;
+  border-bottom: 1px solid var(--t-rule);
+}
+.yearBtn {
+  min-height: 48px; padding: 0 18px;
+  background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  font-family: var(--display);
+  font-size: 24px; letter-spacing: .04em;
+  color: var(--t-muted);
+  transition: color .2s, border-color .2s;
+}
+.yearBtn:hover { color: var(--t-ink); }
+.yearBtn[aria-current="true"] { color: var(--t-ink); border-bottom-color: var(--t-ink); }
+
+/* Track */
+.viewport { margin-top: 28px; touch-action: pan-y; }
+
+.track {
+  position: relative;
+  width: calc(var(--n) * 84%);
+  transition: transform 720ms var(--t-ease);
+  will-change: transform;
+}
+.dragging { transition: none; user-select: none; -webkit-user-select: none; }
+
+.threadClip { position: absolute; left: 0; top: 0; width: 100%; height: var(--band); pointer-events: none; }
+.thread { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* Thread draws itself to the first knot on first view (then the rest appears). */
+.thread_pending { clip-path: inset(0 100% 0 0); }
+.thread_drawing {
+  clip-path: inset(0 calc(100% - 100% / var(--n) * 1.2) 0 0);
+  transition: clip-path 1.8s cubic-bezier(.45, 0, .25, 1) .2s;
+}
+.thread_done { clip-path: none; }
+
+.slides { position: relative; display: flex; }
+
+.slide {
+  flex: 1 1 0; min-width: 0;
+  padding-right: var(--slide-gap);
+  box-sizing: border-box;
+  opacity: .28;
+  transition: opacity 500ms ease;
+}
+.slide.slideActive { opacity: 1; }
+
+.band { position: relative; height: var(--band); margin-right: calc(-1 * var(--slide-gap)); }
+.knot {
+  position: absolute; left: 10%; top: calc(var(--band) * .3);
+  width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%; background: var(--t-ink);
+}
+.kicker {
+  position: absolute; left: calc(14% + 8px); top: calc(var(--band) * .3 - 14px);
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--t-muted); white-space: nowrap;
+}
+
+.slideBody { display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: flex-start; }
+.textCol { flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 18px; padding-top: 8px; }
+.title { margin: 0; font-family: var(--serif); font-weight: 400; font-size: 40px; line-height: 1.1; color: var(--t-ink); overflow-wrap: anywhere; }
+.body { margin: 0; font-size: 16px; line-height: 1.75; color: var(--t-body); max-width: 400px; white-space: pre-line; }
+.guest { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--t-body); }
+.avatar {
+  display: inline-flex; width: 28px; height: 28px; border-radius: 50%;
+  background: #E7E2DA; align-items: center; justify-content: center;
+  font-size: 11px; color: var(--t-ink);
+}
+.mediaCol { flex: 2 1 440px; min-width: 0; }
+
+/* Media */
+.grid { display: grid; gap: 16px; }
+.gridImg { display: block; width: 100%; height: auto; object-fit: cover; }
+
+.placeholder {
+  box-sizing: border-box;
+  aspect-ratio: 4 / 5;
+  border: 1px dashed var(--t-placeholder);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  text-align: center; padding: 16px;
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--t-muted);
+}
+.section .placeholder { display: flex; }
+.placeholder small { font-size: 11px; letter-spacing: .02em; text-transform: none; opacity: .85; }
+
+.videoWrap { position: relative; }
+.videoPoster, .videoEl { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.videoEl { background: #000; object-fit: contain; }
+/* The wrapper owns the shape (inline aspect-ratio); poster/video just fill it. */
+.gridVideo { width: 100%; align-self: start; }
+.gridVideo .videoPoster, .gridVideo .videoEl { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.playBtn {
+  position: absolute; left: 50%; top: 50%;
+  width: 76px; height: 76px; margin: -38px 0 0 -38px;
+  border-radius: 50%; border: 1px solid var(--t-ground);
+  background: rgba(27, 26, 24, .35); color: var(--t-ground);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s;
+}
+.playBtn:hover { background: rgba(27, 26, 24, .6); }
+.section .playBtn:focus-visible { outline-color: var(--t-ground); }
+.videoLabel {
+  position: absolute; left: 16px; bottom: 14px;
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--t-ground);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, .35);
+}
+.videoMissing {
+  position: absolute; inset: auto 16px 50%; transform: translateY(50%);
+  text-align: center; font-size: 12px; color: var(--t-muted);
+}
+
+.illustration { display: block; width: 100%; max-width: 560px; height: auto; background: #F1EEE8; }
+
+/* Add slide */
+.addWrap { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 24px 0; max-width: 520px; text-align: center; }
+.addCircle {
+  box-sizing: border-box; text-decoration: none;
+  width: 200px; height: 200px; border-radius: 50%;
+  border: 1px solid var(--t-ink); background: transparent; color: var(--t-ink);
+  display: flex; align-items: center; justify-content: center;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.section .addCircle:hover,
+.section .addCircle:focus-visible { background: var(--t-ink); color: var(--t-ground); }
+.addLabel { font-family: var(--display); font-size: 24px; letter-spacing: .06em; text-transform: uppercase; }
+.addHint { font-size: 13px; color: var(--t-muted); }
+
+/* Controls */
+.controls { margin-top: 48px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; }
+.arrows { display: flex; align-items: center; gap: 12px; }
+.roundBtn {
+  width: 52px; height: 52px; border-radius: 50%;
+  border: 1px solid #B9B2A8; background: none; color: var(--t-ink);
+  display: flex; align-items: center; justify-content: center; flex: none;
+  transition: opacity .2s, background-color .2s;
+}
+.roundBtnFilled { background: var(--t-ink); border-color: var(--t-ink); color: var(--t-ground); }
+.roundBtn:disabled { opacity: .35; }
+.progress { display: flex; align-items: center; flex-wrap: wrap; }
+.progressHit { width: 28px; height: 44px; background: none; border: none; padding: 0; display: flex; align-items: center; justify-content: center; }
+.progressBar { display: block; width: 8px; height: 2px; background: #B9B2A8; transition: width 300ms ease, background-color 300ms ease; }
+.progressBarActive { width: 22px; background: var(--t-ink); }
+.hint { font-size: 12px; color: var(--t-muted); }
+
+/* New guest moment: brief highlight */
+.slideHighlight .knot { animation: knotPulse 1.2s ease-out 2; }
+.slideHighlight .slideBody { animation: glow 2.6s ease-out; }
+@keyframes knotPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(27, 26, 24, .45); }
+  100% { box-shadow: 0 0 0 18px rgba(27, 26, 24, 0); }
+}
+@keyframes glow {
+  0%, 30% { background: rgba(138, 122, 106, .12); box-shadow: 0 0 0 16px rgba(138, 122, 106, .12); }
+  100%    { background: transparent; box-shadow: 0 0 0 16px transparent; }
+}
+
+.srOnly {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Lightbox (phones) */
+.lightbox {
+  width: 100%; height: 100%; max-width: none; max-height: none;
+  margin: 0; padding: 0; border: none;
+  background: rgba(22, 21, 19, .94); color: var(--t-modal-text);
+}
+.lightbox::backdrop { background: rgba(22, 21, 19, .55); }
+.lightboxInner { display: flex; flex-direction: column; height: 100%; padding: 56px 16px 24px; box-sizing: border-box; }
+.lightboxClose {
+  position: absolute; top: 8px; right: 8px; width: 44px; height: 44px;
+  background: none; border: none; color: inherit; display: flex; align-items: center; justify-content: center;
+}
+.lightboxStage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.lightboxStage > * { width: 100%; }
+.lightboxImg { display: block; width: 100%; max-height: 100%; height: 100%; object-fit: contain; }
+.lightboxBar { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; font-size: 13px; letter-spacing: .1em; }
+.lightboxBar .roundBtn { border-color: var(--t-modal-border); color: var(--t-modal-text); }
+.lightboxBar .roundBtnFilled { background: var(--t-modal-text); color: var(--t-modal); }
+
+/* ── Phones ───────────────────────────────────────────────────────── */
+@media (max-width: 899px) {
+  .section { --band: 84px; --gutter: 24px; --slide-gap: 16px; padding: 40px 0 28px; }
+  .headText { gap: 8px; }
+  .label { font-size: 10px; letter-spacing: .24em; }
+  .heading { font-size: 30px; }
+
+  .yearRail {
+    margin-top: 16px; padding-left: 12px; padding-right: 12px;
+    flex-wrap: nowrap; gap: 2px; overflow-x: auto;
+    scrollbar-width: none; overscroll-behavior-x: contain;
+  }
+  .yearRail::-webkit-scrollbar { display: none; }
+  .yearBtn { flex: 0 0 auto; min-height: 44px; padding: 0 12px; font-size: 19px; }
+
+  .viewport { margin-top: 0; }
+  .track { width: calc(var(--n) * 100%); transition-duration: 650ms; }
+  .slide { opacity: .3; transition-duration: 400ms; }
+  .kicker { font-size: 10px; }
+
+  .slideBody { flex-direction: column; flex-wrap: nowrap; gap: 0; }
+  .mediaCol { order: -1; flex: none; width: 100%; }
+  .textCol { flex: none; gap: 6px; padding-top: 18px; }
+  .title { font-size: 26px; }
+  .body { font-size: 14px; line-height: 1.6; }
+
+  .mobileMedia { position: relative; }
+  .mediaTap { display: block; width: 100%; padding: 0; border: 0; background: none; }
+  /* Natural shape, capped in height; tall shots crop around object-position. */
+  .mobileFill { display: block; width: 100%; height: auto; max-height: 440px; object-fit: cover; }
+  .mobileFill .videoPoster,
+  .mobileFill .videoEl { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+  .mobileFill .videoEl { object-fit: contain; }
+  .badge {
+    position: absolute; right: 10px; bottom: 10px;
+    padding: 4px 10px; border: none;
+    background: rgba(248, 247, 244, .92); color: var(--t-ink);
+    font-size: 11px; letter-spacing: .1em;
+  }
+
+  .illustration { height: 360px; max-width: none; }
+
+  .addWrap { height: 360px; justify-content: center; gap: 18px; padding: 0; max-width: none; }
+  .addCircle { width: 168px; height: 168px; }
+  .addLabel { font-size: 20px; }
+
+  .controls { margin-top: 20px; }
+  .arrows { width: 100%; justify-content: space-between; }
+  .roundBtn { width: 48px; height: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track, .slide, .progressBar, .addCircle, .yearBtn { transition: none !important; }
+  .thread_pending, .thread_drawing { clip-path: none; transition: none; }
+  .slideHighlight .knot, .slideHighlight .slideBody { animation: none; }
+  .slideHighlight .slideBody { outline: 1px solid var(--t-thread); outline-offset: 12px; }
+}

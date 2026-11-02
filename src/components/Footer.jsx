@@ -1,21 +1,15 @@
 import { STUDIO } from './Nav'
 import { CONTACT_INFO } from './Contact'
+import { WEDDING } from '../content/wedding'
 import styles from './Footer.module.css'
 
 const EVENTS = [
   {
-    name: 'Traditional',
-    date: 'June 19, 2027',
-    venue: 'Family House',
-    address: 'La, Accra, Ghana',
-    dressCode: 'Kente / Traditional Wear',
-  },
-  {
-    name: 'White Wedding',
-    date: 'June 20, 2027',
-    venue: 'Labadi Beach Hotel',
-    address: 'La, Accra, Ghana',
-    dressCode: 'Black Tie',
+    name: 'The Wedding',
+    date: WEDDING.dateLabel,
+    time: WEDDING.time,
+    venue: WEDDING.venue,
+    address: WEDDING.address,
   },
 ]
 
@@ -23,14 +17,16 @@ const buildMarqueeItems = () =>
   EVENTS.flatMap(event => [
     { label: event.name, value: '', isHeading: true },
     { label: 'Date', value: event.date },
+    { label: 'Time', value: event.time },
     { label: 'Venue', value: event.venue },
     { label: 'Address', value: event.address },
-    { label: 'Dress Code', value: event.dressCode },
   ])
 
 export default function Footer() {
   const base = buildMarqueeItems()
-  const items = [...base, ...base] // duplicated for seamless loop
+  // Four copies: the strip scrolls by half, so each half must be wider than
+  // the footer even with a single event.
+  const items = [...base, ...base, ...base, ...base]
 
   return (
     <footer id='footer' className={styles.footer}>
@@ -59,7 +55,7 @@ export default function Footer() {
         </a>
       </div>
       <div className={styles.bottom}>
-        <span>© {new Date().getFullYear()} {STUDIO.name} Photography. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Designed by Nkunim Studios. All rights reserved.</span>
         <span>{'Accra, Ghana'}</span>
       </div>
     </footer>

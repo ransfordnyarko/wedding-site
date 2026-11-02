@@ -5,8 +5,8 @@ import styles from './Nav.module.css'
 export const STUDIO = { name: 'EMMA', tagline: 'GodWedUs' }
 // ────────────────────────────────────────────────────
 
-const links = ['Hero', 'About', 'Services', 'Portfolio', 'Footer']
-const links2 = ['Home', 'Our Story', 'Moments', 'Photography', 'Contact']
+const links = ['Hero', 'About', 'Moments', 'Portfolio', 'Details', 'Gifts', 'Footer']
+const links2 = ['Home', 'Our Story', 'Moments', 'Photography', 'Details', 'Gifts', 'Contact']
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)

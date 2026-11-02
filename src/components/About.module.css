@@ -23,12 +23,44 @@
   margin-bottom: 2rem;
 }
 
-.body {
-  font-size: 14px; line-height: 1.9;
-  color: var(--mid-gray);
-  white-space: pre-line;
-  margin-bottom: 2.5rem;
+/* Story voices: Ransford = slate blue, Ewoe = dusty rose, together = antique gold.
+   Muted takes on blue/pink so they sit with the site's warm neutrals; all pass
+   WCAG AA contrast on the page background. */
+.about {
+  --voice-him: #34465C;
+  --voice-her: #9B4F5E;
+  --voice-us:  #8A6A2C;
 }
+
+.story { display: flex; flex-direction: column; gap: 1.6rem; margin-bottom: 2.5rem; }
+
+.para {
+  position: relative;
+  padding-left: 1.25rem;
+}
+.para::before {
+  content: ''; position: absolute; left: 0; top: .2rem; bottom: .2rem; width: 2px;
+  background: var(--rule-from);
+}
+.rule_him { --rule-from: var(--voice-him); }
+.rule_her { --rule-from: var(--voice-her); }
+.rule_us  { --rule-from: var(--voice-us); }
+.ruleTo_him::before { background: linear-gradient(var(--rule-from), var(--voice-him)); }
+.ruleTo_her::before { background: linear-gradient(var(--rule-from), var(--voice-her)); }
+
+.voice {
+  margin: 0 0 .4rem;
+  font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+}
+.voiceSep { margin: 0 .6em; color: var(--mid-gray); }
+.voice_him { color: var(--voice-him); }
+.voice_her { color: var(--voice-her); }
+.voice_us  { color: var(--voice-us); }
+
+.paraText { margin: 0; font-size: 15px; line-height: 1.85; }
+.text_him { color: var(--voice-him); }
+.text_her { color: var(--voice-her); }
+.text_us  { color: var(--voice-us); font-family: var(--serif); font-style: italic; font-size: 1.15em; }
 
 .cta {
   font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;

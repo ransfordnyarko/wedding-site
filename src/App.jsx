@@ -3,9 +3,11 @@ import './styles/globals.css'
 import Nav       from './components/Nav'
 import Hero      from './components/Hero'
 import About     from './components/About'
-import Services  from './components/Services'
+import ThreadSection from './components/thread/ThreadSection'
 import Portfolio from './components/Portfolio'
+import Details   from './components/Details'
 import Contact   from './components/Contact'
+import Gifts     from './components/Gifts'
 import Footer    from './components/Footer'
 
 export default function App() {
@@ -33,9 +35,11 @@ export default function App() {
       <Nav />
       <Hero />
       <About />
-      <Services />
+      <ThreadSection />
       <Portfolio />
+      <Details />
       <Contact />
+      <Gifts />
       <Footer />
     </>
   )

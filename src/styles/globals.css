@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,8 +12,28 @@
   --accent:      #B8A99A;
   --serif:       'Playfair Display', Georgia, serif;
   --sans:        'DM Sans', system-ui, sans-serif;
+  --display:     'Italiana', var(--serif);
   --transition:  0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* "Nine years, one thread" tokens */
+  --t-ground:      #F8F7F4;
+  --t-ink:         #1B1A18;
+  --t-body:        #4A4640;
+  --t-muted:       #6B665F;
+  --t-thread:      #8A7A6A;
+  --t-rule:        #DEDAD3;
+  --t-placeholder: #A49C91;
+  --t-modal:        #161513;
+  --t-modal-field:  #222120;
+  --t-modal-border: #3A3835;
+  --t-modal-text:   #F3F1EC;
+  --t-modal-muted:  #A8A196;
+  --t-ease:        cubic-bezier(.22, .61, .36, 1);
 }
+
+/* The custom cursor can't sit above the top layer, so dialogs use the system cursor. */
+dialog, dialog * { cursor: auto; }
+dialog button, dialog label, dialog [role="tab"] { cursor: pointer; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 

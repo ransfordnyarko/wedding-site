@@ -1,0 +1,17 @@
+.page { padding: 48px 32px; max-width: 1200px; margin: 0 auto; font-family: var(--sans); font-weight: 400; color: var(--t-ink); }
+.page, .page * { cursor: auto; }
+.page button, .page a, .page select { cursor: pointer; }
+.page button, .page select, .page input { font: inherit; padding: 8px 12px; border: 1px solid #B9B2A8; background: #fff; color: inherit; }
+.h1 { font-family: var(--serif); font-weight: 400; font-size: 32px; margin: 0 0 24px; }
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 16px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 14px; }
+.login { display: flex; flex-direction: column; gap: 10px; max-width: 320px; font-size: 14px; }
+.note { font-size: 14px; color: var(--t-muted); }
+.error { color: #A2321F; font-size: 14px; }
+.table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 16px; }
+.table th, .table td { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--t-rule); }
+.table th { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--t-muted); font-weight: 400; }
+.hidden td { opacity: .5; }
+.files { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; max-width: 360px; }
+.files a { color: var(--t-ink); word-break: break-all; }
+.files img { display: block; object-fit: cover; }
