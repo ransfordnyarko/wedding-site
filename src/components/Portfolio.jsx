@@ -1,20 +1,21 @@
 import { useEffect, useRef } from 'react'
 import styles from './Portfolio.module.css'
-import image1 from '../assets/Portfolio/SHI_7552.jpg'
-import image5 from '../assets/Portfolio/SHI_7624.jpg'
-import image3 from '../assets/Portfolio/SHI_7586.jpg'
-import image4 from '../assets/Portfolio/SHI_7604.jpg'
-import image2 from '../assets/Portfolio/SHI_7576.jpg'
-import image6 from '../assets/Portfolio/SHI_7752.jpg'
+// Web-sized copies (1800px, ~0.5 MB) of the originals in src/assets/Portfolio.
+import image1 from '../assets/Portfolio/web/SHI_7551.jpg'
+import image2 from '../assets/Portfolio/web/SHI_7557.jpg'
+import image3 from '../assets/Portfolio/web/SHI_7644.jpg'
+import image4 from '../assets/Portfolio/web/SHI_7663.jpg'
+import image5 from '../assets/Portfolio/web/SHI_7698.jpg'
+import image6 from '../assets/Portfolio/web/SHI_7719.jpg'
 
-// ── Replace with your actual portfolio images ────────
+// `position` keeps both of you in frame when a wide photo is cropped to a tall tile.
 const IMAGES = [
-  { src: image1, alt: 'Portrait' },
-  { src: image2, alt: 'Wedding ceremony' },
-  { src: image3, alt: 'Couple portrait' },
-  { src: image4, alt: 'Wedding couple' },
-  { src: image5, alt: 'Bride' },
-  { src: image6, alt: 'Couple' },
+  { src: image1, alt: 'Ransford on one knee proposing to Ewoe on the steps of a historic building' },
+  { src: image2, alt: 'Ransford and Ewoe embracing in front of carved wooden doors' },
+  { src: image3, alt: 'Ransford and Ewoe laughing together on a park bench', position: '78% center' },
+  { src: image4, alt: 'Ransford and Ewoe walking up a path hand in hand' },
+  { src: image5, alt: 'Ransford and Ewoe walking down wide stone steps together' },
+  { src: image6, alt: 'Ransford and Ewoe crossing a city street side by side' },
 ]
 // ────────────────────────────────────────────────────
 
@@ -50,7 +51,7 @@ export default function Portfolio() {
             className={`${styles.cell} reveal`}
             style={{ transitionDelay: `${(i % 3) * 0.1}s` }}
           >
-            <img src={img.src} alt={img.alt} loading="lazy" />
+            <img src={img.src} alt={img.alt} loading="lazy" decoding="async" style={img.position ? { objectPosition: img.position } : undefined} />
           </div>
         ))}
       </div>

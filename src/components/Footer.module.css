@@ -13,12 +13,7 @@
   margin-bottom: 1.5rem;
 }
 
-.logo {
-  font-family: var(--serif);
-  font-size: 1.2rem; letter-spacing: 0.3em;
-  color: var(--white);
-  flex-shrink: 0;
-}
+.logo { display: block; height: 64px; width: auto; flex-shrink: 0; }
 
 /* Marquee */
 .marquee {

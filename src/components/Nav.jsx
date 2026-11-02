@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './Nav.module.css'
 
 // ── Config ──────────────────────────────────────────
-export const STUDIO = { name: 'EMMA', tagline: 'GodWedUs' }
+export const STUDIO = { name: 'Ransford & Ewoe', tagline: 'GodWedUs', logo: '/logo/rm-wreath.png' }
 // ────────────────────────────────────────────────────
 
 const links = ['Hero', 'About', 'Moments', 'Portfolio', 'Details', 'Gifts', 'Footer']
@@ -20,7 +20,9 @@ export default function Nav() {
 
   return (
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-      <a href="#hero" className={styles.logo}>{STUDIO.name}</a>
+      <a href="#hero" className={styles.logo} aria-label={`${STUDIO.name}, back to top`}>
+        <img src={STUDIO.logo} alt="" width="354" height="360" />
+      </a>
 
       <ul className={`${styles.links} ${menuOpen ? styles.open : ''}`}>
         {links.map((l, i) => (

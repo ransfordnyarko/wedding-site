@@ -31,7 +31,7 @@ export default function Footer() {
   return (
     <footer id='footer' className={styles.footer}>
       <div className={styles.top}>
-        <span className={styles.logo}>{STUDIO.name}</span>
+        <img className={styles.logo} src={STUDIO.logo} alt={STUDIO.name} width="354" height="360" />
 
         <div className={styles.marquee}>
           <div className={styles.track}>

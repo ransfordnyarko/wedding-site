@@ -117,3 +117,6 @@
 @media (prefers-reduced-motion: reduce) {
   .btn, .round { transition: none; }
 }
+
+.cardHead { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; }
+.momoLogo { display: block; width: 56px; height: auto; flex-shrink: 0; }

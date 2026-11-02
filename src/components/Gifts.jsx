@@ -4,9 +4,9 @@ import styles from './Gifts.module.css'
 // ── Edit gift details here ───────────────────────────
 // Text in [brackets] is a placeholder and shows on the site until replaced.
 const MOMO = {
-  name: 'Boye',              // account name as it appears on MoMo
-  number: '[MoMo number]',   // e.g. '024 123 4567'
-  network: '[Network]',      // MTN, Telecel or AirtelTigo
+  name: 'Emmanuel Doh',      // account name as it appears on MoMo
+  number: '050 136 7452',    // copied without spaces
+  network: 'Telecel Cash',
 }
 
 const REGISTRY_URL = 'https://www.amazon.ca/wedding/guest-view/3D2BAF1HQ17KA' // our Amazon registry
@@ -49,7 +49,10 @@ function MomoCard() {
   }
   return (
     <div className={`${styles.card} reveal`}>
-      <span className={styles.cardLabel}>Mobile Money · Ghana</span>
+      <div className={styles.cardHead}>
+        <span className={styles.cardLabel}>Mobile Money · Ghana</span>
+        <img className={styles.momoLogo} src="/gifts/telecel-cash.png" alt="Telecel Cash" width="480" height="256" />
+      </div>
       <p className={styles.number}>{MOMO.number}</p>
       <dl className={styles.details}>
         <div><dt>Name</dt><dd>{MOMO.name}</dd></div>

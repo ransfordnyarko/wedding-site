@@ -13,13 +13,14 @@
   border-color: var(--warm-gray);
 }
 
-.logo {
-  font-family: var(--serif);
-  font-size: 1.4rem; letter-spacing: 0.3em;
-  color: var(--white); text-decoration: none;
-  transition: color 0.4s;
+.logo { display: flex; align-items: center; text-decoration: none; }
+/* White over the hero photo (like the menu text), gold once the bar turns light. */
+.logo img {
+  display: block; height: 54px; width: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 6px rgba(0, 0, 0, .25));
+  transition: height 0.4s, filter 0.4s;
 }
-.nav.scrolled .logo { color: var(--black); }
+.nav.scrolled .logo img { height: 46px; filter: none; }
 
 .links {
   display: flex; gap: 2.5rem; list-style: none;
