@@ -10,6 +10,7 @@ export const WEDDING = {
   venue: 'New Creation International Church Headquarters',
   address: 'Palos Verdes Dr, Accra, Ghana',
   plusCode: 'JV57+2VP',
+  dressCode: 'Black Tie',
   mapEmbedUrl: `https://www.google.com/maps?q=${encodeURIComponent(PLUS_CODE)}&z=16&output=embed`,
   directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(PLUS_CODE)}`,
 }

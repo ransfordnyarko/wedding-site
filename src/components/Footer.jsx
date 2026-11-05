@@ -10,6 +10,7 @@ const EVENTS = [
     time: WEDDING.time,
     venue: WEDDING.venue,
     address: WEDDING.address,
+    dressCode: WEDDING.dressCode,
   },
 ]
 
@@ -20,6 +21,7 @@ const buildMarqueeItems = () =>
     { label: 'Time', value: event.time },
     { label: 'Venue', value: event.venue },
     { label: 'Address', value: event.address },
+    { label: 'Dress Code', value: event.dressCode },
   ])
 
 export default function Footer() {
